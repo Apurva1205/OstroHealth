@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en" data-seed>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Apurva Ravikar Chavan — Ready to Interview</title>
+  <meta name="description" content="A constantly‑fresh job application microsite for Apurva Ravikar Chavan. New look on every load." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- THEME TOKENS (swapped at runtime) ---------- */
+    :root{
+      --bg:#0b0f16; --surface:#101827; --ink:#e2e8f0; --muted:#94a3b8; --line:#21304a;
+      --accent:#7c3aed; --accent2:#22d3ee; --radius:18px; --shadow:0 12px 30px rgba(0,0,0,.25);
+      --font:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --heading:var(--font);
+    }
+    /* Neon theme */
+    body.theme-neon{background:
+      radial-gradient(900px 600px at 90% -10%, rgba(124,58,237,.25), transparent 60%),
+      radial-gradient(800px 600px at -10% 10%, rgba(34,211,238,.18), transparent 50%),
+      var(--bg);}
+    body.theme-neon{--accent:#7c3aed; --accent2:#22d3ee; --surface:#121826; --line:#1f2a44; --radius:18px; --shadow:0 16px 40px rgba(124,58,237,.18)}
+
+    /* Paper/Serif theme */
+    body.theme-paper{--bg:#f7f7f2; --surface:#ffffff; --ink:#111827; --muted:#6b7280; --line:#e5e7eb; --accent:#0ea5e9; --accent2:#34d399; --radius:10px; --shadow:0 10px 24px rgba(17,24,39,.06); --font:"Inter", system-ui; --heading:"DM Serif Display", Georgia, serif;}
+    body.theme-paper{background:linear-gradient(180deg,#fafaf7, #f3f4f6 60%, #eef2ff)}
+
+    /* Brutalist theme */
+    body.theme-brutal{--bg:#0f0f0f; --surface:#0f0f0f; --ink:#f3f4f6; --muted:#a3a3a3; --line:#222; --accent:#f59e0b; --accent2:#ef4444; --radius:6px; --shadow:8px 8px 0 #000;}
+    body.theme-brutal{background:repeating-linear-gradient(45deg, #0f0f0f 0 12px,#111111 12px 24px)}
+
+    /* Sunset theme */
+    body.theme-sunset{--bg:#0b1220; --surface:#0e1626; --ink:#e5e7eb; --muted:#9aa7bd; --line:#1b2942; --accent:#fb7185; --accent2:#f59e0b; --radius:20px; --shadow:0 18px 40px rgba(251,113,133,.22)}
+    body.theme-sunset{background:radial-gradient(1200px 700px at 50% -10%, rgba(251,113,133,.18), transparent 60%), linear-gradient(180deg,#0b1220,#0b1220 40%,#0a1222)}
+
+    *{box-sizing:border-box}
+    html,body{margin:0; padding:0; color:var(--ink); font-family:var(--font)}
+    a{color:inherit}
+    .wrap{max-width:1120px; margin:0 auto; padding:20px}
+    header{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0}
+    .brand{display:flex; align-items:center; gap:12px}
+    .avatar{inline-size:44px; block-size:44px; border-radius:50%; display:grid; place-items:center; font-weight:800; color:#0b0f16; background:linear-gradient(135deg, var(--accent), var(--accent2)); box-shadow:var(--shadow)}
+    nav a{opacity:.9; text-decoration:none; margin-inline:10px}
+    nav a:hover{opacity:1}
+
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px; text-decoration:none; font-weight:600; background:linear-gradient(135deg, var(--accent), var(--accent2)); color:#0b0f16; box-shadow:var(--shadow)}
+    .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--line)}
+    .btn.square{border-radius:8px}
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid var(--line); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow)}
+    body.theme-paper .card{background:var(--surface)}
+    body.theme-brutal .card{border:3px solid #000}
+
+    /* ---------- LAYOUT MODES ---------- */
+    .hero{display:grid; gap:24px}
+    .layout-split .hero{grid-template-columns:1.1fr .9fr}
+    .layout-stacked .hero{grid-template-columns:1fr}
+    .layout-timeline .hero{grid-template-columns:1fr}
+
+    .grid{display:grid; gap:16px}
+    .grid.cols-12{grid-template-columns:repeat(12,1fr)}
+    .span-6{grid-column:span 6}
+    .span-4{grid-column:span 4}
+    @media (max-width: 900px){.grid.cols-12{grid-template-columns:repeat(6,1fr)} .span-6,.span-4{grid-column:span 6}}
+
+    .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:14px}
+    .kpi{background:rgba(255,255,255,.04); border:1px solid var(--line); border-radius:12px; padding:12px}
+    body.theme-paper .kpi{background:#fafafa}
+
+    .stack{display:flex; flex-wrap:wrap; gap:10px}
+    .pill{display:inline-flex; gap:8px; align-items:center; padding:8px 10px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.03)}
+    .badge{font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid var(--line)}
+    .muted{color:var(--muted)}
+    h1{font-family:var(--heading); font-size:40px; line-height:1.1; margin:0 0 8px}
+    h2{font-family:var(--heading); font-size:22px; margin:0 0 10px}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+
+    /* Timeline elements (only used in timeline layout) */
+    .timeline{position:relative; padding-left:22px}
+    .timeline:before{content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background:var(--line)}
+    .t-item{position:relative; margin:14px 0; padding-left:10px}
+    .t-item:before{content:""; position:absolute; left:-2px; top:6px; width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent2)); box-shadow:0 0 0 3px rgba(255,255,255,.06)}
+
+    footer{margin:28px 0 12px; color:var(--muted); font-size:13px; text-align:center}
+
+    /* Tiny variations per layout */
+    .layout-brutal .btn{box-shadow:8px 8px 0 #000}
+  </style>
+</head>
+<body class="theme-neon layout-split">
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="avatar" aria-hidden>AR</div>
+        <div>
+          <div class="mono" style="letter-spacing:.02em">Apurva Ravikar Chavan</div>
+          <div class="muted" style="font-size:13px">Data Scientist • ML/Backend Engineer • Ready to Interview</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#fit">Company Fit</a>
+      </nav>
+      <div style="display:flex; gap:10px; align-items:center">
+        <button id="shuffle" class="btn square" title="Shuffle style">Shuffle ✨</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="card">
+        <h1 id="headline">Turning messy data into reliable products.</h1>
+        <p class="muted">I build practical ML systems end‑to‑end: data pipelines → features → models → evaluation → deployment, then measure business impact.</p>
+        <div class="stack" style="margin-top:12px">
+          <span class="pill">New Haven, CT</span>
+          <a class="pill" href="mailto:apurvachavan125@gmail.com">apurvachavan125@gmail.com</a>
+          <a class="pill" href="tel:+12034104412">(203) 410‑4412</a>
+          <a class="pill" href="https://www.linkedin.com/in/apurvachavan125" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="pill" href="https://github.com/Apurva1205" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn" href="mailto:apurvachavan125@gmail.com?subject=Interview%20with%20Apurva%20R%20Chavan">Invite to interview<\/a>
+          <a class="btn ghost" href="#projects">See selected work</a>
+        </div>
+        <div class="kpis">
+          <div class="kpi"><div class="muted">Experience</div><div style="font-size:20px; font-weight:800">3+ yrs ML/Analytics</div></div>
+          <div class="kpi"><div class="muted">Ship style</div><div style="font-size:20px; font-weight:800">E2E + MLOps</div></div>
+          <div class="kpi"><div class="muted">Focus</div><div style="font-size:20px; font-weight:800">Forecasting & IRL impact</div></div>
+        </div>
+      </div>
+      <div class="card" id="greatat">
+        <h2>What I’m great at</h2>
+        <ul style="margin:0; padding-left:18px; line-height:1.7">
+          <li>Owning the whole loop from ingestion → feature engineering → training (GBM, LSTM) → evaluation → deploy.</li>
+          <li>Designing clean data contracts, CI/CD for analytics/ML, and drift/quality monitoring.</li>
+          <li>Communicating results clearly to both engineers and business partners.</li>
+        </ul>
+        <div class="stack" style="margin-top:12px">
+          <span class="badge">Python</span><span class="badge">PyTorch</span><span class="badge">scikit‑learn</span><span class="badge">SQL</span><span class="badge">Spark</span><span class="badge">Docker</span><span class="badge">Airflow</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="grid cols-12" style="margin-top:24px">
+      <div class="span-6 card">
+        <h2>Core Skills</h2>
+        <div class="stack">
+          <span class="pill">Feature Engineering</span>
+          <span class="pill">Regression / Classification</span>
+          <span class="pill">Time‑Series (ARIMA, LSTM)</span>
+          <span class="pill">KPI Dashboards</span>
+          <span class="pill">Experiment Design</span>
+          <span class="pill">CI/CD for ML</span>
+          <span class="pill">Data Quality & Drift</span>
+          <span class="pill">Cloud Data Lakes (S3/Parquet)</span>
+          <span class="pill">Spark</span>
+          <span class="pill">APIs & Microservices</span>
+        </div>
+      </div>
+      <div class="span-6 card" id="rolesBlock">
+        <h2>Recent Roles</h2>
+        <div class="timeline">
+          <div class="t-item">
+            <strong>Data Scientist Intern — Ideatrix Cogn AI Lab</strong>
+            <div class="muted">2025 – Ongoing · Reasoning algorithms for multi‑agent dialogue games; deception/trust analysis tools.</div>
+          </div>
+          <div class="t-item">
+            <strong>Research Assistant — Univ. of New Haven</strong>
+            <div class="muted">2024 – 2025 · LLM data ops & finetuning; secure deployment; active‑learning feedback loops.</div>
+          </div>
+          <div class="t-item">
+            <strong>ML Engineer — TCS Research & Innovation</strong>
+            <div class="muted">2021 – 2023 · Forecasting models; model tracking; efficient serving cut AWS cost ~25%.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" style="margin-top:24px">
+      <div class="grid cols-12" id="projectsGrid">
+        <div class="span-4 card project">
+          <div style="display:flex; justify-content:space-between; align-items:center">
+            <strong>AI Resume Enhancer</strong>
+            <span class="badge">NLP • IR</span>
+          </div>
+          <p class="muted">Resume & JD parser (sentence‑transformers) + scoring engine for missing skills; real‑time API powering recruiter dashboards.</p>
+          <div class="stack">
+            <a class="pill" href="https://github.com/Apurva1205" target="_blank" rel="noopener">Repo(s)</a>
+            <span class="pill">Python • FastAPI</span>
+          </div>
+        </div>
+        <div class="span-4 card project">
+          <div style="display:flex; justify-content:space-between; align-items:center">
+            <strong>Eng↔︎Belarusian NMT</strong>
+            <span class="badge">Low‑Resource MT</span>
+          </div>
+          <p class="muted">BERT‑GPT‑2 hybrid with transfer learning & bilingual preprocessing; optimized BLEU for inclusive language access.</p>
+          <div class="stack">
+            <span class="pill">PyTorch</span><span class="pill">Tokenization</span>
+          </div>
+        </div>
+        <div class="span-4 card project">
+          <div style="display:flex; justify-content:space-between; align-items:center">
+            <strong>Energy Load Forecasting</strong>
+            <span class="badge">Time‑Series</span>
+          </div>
+          <p class="muted">ARIMA & LSTM pipelines for regional utility loads; anomaly detection + alerting for infrastructure resilience.</p>
+          <div class="stack"><span class="pill">Pandas</span><span class="pill">scikit‑learn</span><span class="pill">PyTorch</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fit" class="card" style="margin-top:24px">
+      <h2 id="fitTitle">Company‑Specific Fit</h2>
+      <div id="fitBody" class="stack" style="flex-direction:column; align-items:flex-start; gap:10px"></div>
+      <div style="margin-top:14px">
+        <button id="copyNote" class="btn ghost">Copy 3‑line note for application</button>
+      </div>
+    </section>
+
+    <section id="about" class="card" style="margin-top:24px">
+      <h2>About me</h2>
+      <p class="muted">M.S. in Data Science (University of New Haven). I care about building useful systems — not just benchmarks — and I document/monitor what I ship so teams can trust and extend it.</p>
+      <div class="stack">
+        <span class="pill">M.S. Data Science</span>
+        <span class="pill">B.E. Information Technology</span>
+        <span class="pill">Clear storyteller</span>
+        <span class="pill">Mentors teammates</span>
+      </div>
+    </section>
+
+    
+
+    <footer>
+      <div>© <span id="y"></span> Apurva R. Chavan — Fresh theme on every load. <span class="muted">Seed:</span> <span id="seed"></span></div>
+    </footer>
+  </div>
+
+  <script>
+    // ---------- VARIATION ENGINE ----------
+    const themes = [
+      {name:'neon', body:'theme-neon', heading:'Space Grotesk, var(--font)'},
+      {name:'paper', body:'theme-paper', heading:'DM Serif Display, Georgia, serif'},
+      {name:'brutal', body:'theme-brutal layout-brutal', heading:'Space Grotesk, var(--font)'},
+      {name:'sunset', body:'theme-sunset', heading:'Space Grotesk, var(--font)'}
+    ];
+    const layouts = ['layout-split','layout-stacked','layout-timeline'];
+    const headlines = [
+      'Turning messy data into reliable products.',
+      'I ship ML that moves metrics, not just benchmarks.',
+      'From raw data to shipped features — fast and reliable.',
+      'Practical ML systems with clear, measurable impact.'
+    ];
+
+    function pick(arr, seed){ return arr[Math.floor(rand(seed)*arr.length)] }
+
+    // Simple deterministic rng from current day/time for stable shareable looks
+    function rand(seed){
+      const x = Math.sin(seed++)*10000; return x - Math.floor(x);
+    }
+
+    function todaySeed(){
+      // Use epoch minutes so the look shifts each visit; change to hours/day if you prefer
+      return Math.floor(Date.now()/ (1000*60));
+    }
+
+    function applyVariation(customSeed){
+      const seed = customSeed ?? todaySeed();
+      document.getElementById('seed').textContent = seed;
+      const theme = pick(themes, seed+1);
+      const layout = pick(layouts, seed+2);
+      document.body.className = theme.body + ' ' + layout;
+      document.documentElement.style.setProperty('--heading', theme.heading);
+
+      const h = document.getElementById('headline');
+      h.textContent = pick(headlines, seed+3);
+
+      // Minor random swaps: swap order of hero cards, shuffle projects
+      const hero = document.querySelector('.hero');
+      if(rand(seed+4) > 0.5){ hero.append(hero.firstElementChild); }
+
+      const grid = document.getElementById('projectsGrid');
+      const cards = Array.from(grid.children);
+      cards.sort(()=> rand(seed+5)-0.5).forEach(c=>grid.appendChild(c));
+
+      // Timeline vs standard roles block
+      const rolesBlock = document.getElementById('rolesBlock');
+      rolesBlock.classList.toggle('card', true);
+
+      // Great-at block variant: convert to chips deck sometimes
+      if(rand(seed+6) > 0.65){
+        const ga = document.getElementById('greatat');
+        const ul = ga.querySelector('ul');
+        const pts = ['Own E2E loops','Clean data contracts','Drift monitoring','Clear comms'];
+        ul.replaceWith(Object.assign(document.createElement('div'),{
+          className:'stack',
+          innerHTML: pts.map(p=>`<span class="pill">${p}</span>`).join('')
+        }));
+      }
+
+      // Brutalist corners
+      if(document.body.classList.contains('layout-brutal')){
+        document.querySelectorAll('.btn').forEach(b=>b.classList.add('square'))
+      }
+    }
+
+    applyVariation();
+
+    document.getElementById('shuffle').addEventListener('click',()=>{
+      applyVariation(Math.floor(Math.random()*1e9));
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+    // Company-specific fits pulled from the user's job list & description provided
+    const FITS = {
+      voicera: {
+        title:"Company‑Specific Fit: Voicera AI (AI/ML Engineer — Internship)",
+        bullets:[
+          "🎯 Why me: CV + NLP pipelines shipped; comfortable with PyTorch/TensorFlow, dataset curation, and edge deploys.",
+          "🧠 Week‑1 demo: face landmarks + voice prosody → fused logits for a simple sincerity score; clean UX + eval script.",
+          "🔬 Eval: hold‑out clips; precision/recall by speaker; calibration; ablations (vision/audio/fused); edge latency.",
+          "🛠️ Stack: Python, PyTorch, torchaudio, ONNX, FastAPI, Docker, Grafana.",
+          "🔐 Principles: privacy‑first processing, bias checks, model cards."
+        ],
+        note:`Interested because it's real multimodal ML with quick iteration. I can ship a week‑1 demo (landmarks + prosody → fused score), and measure impact with calibration + latency on edge. Strong PyTorch/ONNX/ FastAPI, dataset curation, and product mindset.`
+      },
+      ostro: {
+        title:"Company‑Specific Fit: Ostro Health — AI/LLM Engineer (Remote)",
+        bullets:[
+          "💊 Mission fit: improving access to trusted health info via AI—aligns with my goal to ship ML that changes patient behavior, not just benchmarks.",
+          "🧰 Stack: Python + OpenAI/Vertex, prompt engineering, eval harnesses, and safeguards for regulated content (HIPAA adjacency, PHI redaction).",
+          "🧪 What I’d do in month 1: build an LLM evaluation loop for omnichannel messages (web/email/SMS): goal‑conditioned prompts, regression tests, toxicity/PHA filters, and cost dashboards.",
+          "📈 Impact: reduce hallucinations via retrieval templates + guardrails; track CTR/engagement lift with A/B and human review UI.",
+          "🔐 Compliance: templated prompts with PII scrubbing, audit logs, and policy‑mapped failure modes."
+        ],
+        note:`I’m excited by Ostro’s AI‑powered omnichannel engagement in life sciences. I can help design prompt + retrieval patterns with automated evaluation, safety checks, and cost controls. Even with <5 yrs industry, I’ve shipped end‑to‑end ML systems and can move quickly with clear metrics (quality, safety, latency, cost).`
+      },
+      cypris: {
+        title:"Company‑Specific Fit: Cypris — Sr. Software Engineer, Data",
+        bullets:[
+          "📚 R&D data pipelines: experience cleaning heterogeneous corpora (papers, patents, reports) and shipping features for search/insight.",
+          "🔎 Retrieval quality: embedding selection, re‑ranking, dedup, and freshness signals; evaluation with offline metrics + user feedback.",
+          "⚙️ Platform: Python/SQL/Spark on cloud, CI/CD, data contracts, lineage + observability."
+        ],
+        note:`I’d focus on robust data ingestion + retrieval quality so R&D teams get trustworthy answers fast. I’ve built NLP pipelines and evaluation loops that improve precision/recall while controlling cost.`
+      },
+      nova: {
+        title:"Company‑Specific Fit: Nova Credit — Senior/Staff Software Engineer",
+        bullets:[
+          "🌍 Data integrity + compliance: experience with privacy‑minded data flows and auditable transformations.",
+          "📊 ML/analytics infra: event‑driven pipelines, idempotent jobs, schema evolution, and reliability under growth.",
+          "🤝 Product mindset: translate metrics to customer outcomes (approval rates, risk flags, latency)."
+        ],
+        note:`Motivated by Nova’s mission around fair access to finance. I bring strong data/ML engineering foundations and a habit of measuring impact on customer KPIs.`
+      },
+      tracevision: {
+        title:"Company‑Specific Fit: Tracevision — ML/Frontend Video Intelligence",
+        bullets:[
+          "🎥 Video analytics UI + inference: experience surfacing model outputs (tracks/events) with snappy, accessible UIs.",
+          "🧮 Practical CV: detection/tracking, batching, and cost‑aware serving; error analysis dashboards."
+        ],
+        note:`I enjoy building the bridge from models to usable video tools. I can help on both the inference layer and the front‑end that proves value to users.`
+      }
+    };
+
+    function renderFit(which){
+      const cfg = FITS[which] || FITS.voicera;
+      document.getElementById('fitTitle').textContent = cfg.title;
+      const body = document.getElementById('fitBody');
+      body.innerHTML = cfg.bullets.map(b=>`<div>${b}</div>`).join('');
+      document.getElementById('copyNote').onclick = () => {
+        navigator.clipboard.writeText(cfg.note).then(()=>{
+          const btn = document.getElementById('copyNote');
+          const old = btn.textContent; btn.textContent = 'Copied ✓';
+          setTimeout(()=> btn.textContent = old, 1200);
+        });
+      };
+    }
+
+    const sel = document.getElementById('company');
+    if (sel) {
+      sel.addEventListener('change', e=> renderFit(e.target.value));
+      renderFit(sel.value);
+    } else {
+      renderFit('voicera');
+    }
+  </script>
+</body>
+</html>
